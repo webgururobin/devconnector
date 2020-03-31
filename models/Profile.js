@@ -102,11 +102,14 @@ const ProfileSchema = new mongoose.Schema({
 		},
 		linkedin: {
 			type: String
+		},
+		twitter: {
+			type: String
 		}
 	},
 	date: {
 		type: Date,
-		required: true
+		default: Date.now
 	}
 });
 
