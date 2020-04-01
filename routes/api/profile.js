@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
@@ -88,8 +88,6 @@ router.post(
 		if (linkedin) profileFields.social.linkedin = linkedin;
 		if (facebook) profileFields.social.facebook = facebook;
 		if (twitter) profileFields.social.twitter = twitter;
-
-		console.log(profileFields.social);
 
 		try {
 			let profile = await Profile.findOne({ user: req.user.id });
