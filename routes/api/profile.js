@@ -15,11 +15,11 @@ const User = require('../../models/User');
 router.get('/me', auth, async (req, res) => {
 	try {
 		const profile = await Profile.findOne({
-			user: req.user.id
+			user: req.user.id,
 		}).populate('user', ['name', 'avatar']); // populate additional field
 
 		if (!profile) {
-			res.status(400).json({ msg: 'There is no profile for the user' });
+			return res.status(400).json({ msg: 'There is no profile for the user' });
 		}
 
 		res.json(profile);
@@ -37,13 +37,9 @@ router.post(
 	[
 		auth,
 		[
-			check('status', 'Status is required')
-				.not()
-				.isEmpty(),
-			check('skills', 'Skills is required')
-				.not()
-				.isEmpty()
-		]
+			check('status', 'Status is required').not().isEmpty(),
+			check('skills', 'Skills is required').not().isEmpty(),
+		],
 	],
 	async (req, res) => {
 		const errors = validationResult(req);
@@ -64,7 +60,7 @@ router.post(
 			facebook,
 			twitter,
 			instagram,
-			linkedin
+			linkedin,
 		} = req.body;
 
 		// Build profile object
@@ -138,7 +134,7 @@ router.get('/', async (req, res) => {
 router.get('/user/:user_id', async (req, res) => {
 	try {
 		const profile = await Profile.findOne({
-			user: req.params.user_id
+			user: req.params.user_id,
 		}).populate('user', ['name', 'avatar']);
 
 		if (!profile) return res.status(400).json({ msg: 'Profile not found' });
@@ -180,16 +176,10 @@ router.put(
 	[
 		auth,
 		[
-			check('title', 'Title is required')
-				.not()
-				.isEmpty(),
-			check('company', 'Company is required')
-				.not()
-				.isEmpty(),
-			check('from', 'From date is required')
-				.not()
-				.isEmpty()
-		]
+			check('title', 'Title is required').not().isEmpty(),
+			check('company', 'Company is required').not().isEmpty(),
+			check('from', 'From date is required').not().isEmpty(),
+		],
 	],
 	async (req, res) => {
 		const errors = validationResult(req);
@@ -206,7 +196,7 @@ router.put(
 			from,
 			to,
 			current,
-			description
+			description,
 		} = req.body;
 
 		const newExp = {
@@ -216,7 +206,7 @@ router.put(
 			from,
 			to,
 			current,
-			description
+			description,
 		};
 
 		try {
@@ -265,19 +255,11 @@ router.put(
 	[
 		auth,
 		[
-			check('school', 'School is required')
-				.not()
-				.isEmpty(),
-			check('degree', 'Degree is required')
-				.not()
-				.isEmpty(),
-			check('fieldofstudy', 'Field of study is required')
-				.not()
-				.isEmpty(),
-			check('from', 'From date is required')
-				.not()
-				.isEmpty()
-		]
+			check('school', 'School is required').not().isEmpty(),
+			check('degree', 'Degree is required').not().isEmpty(),
+			check('fieldofstudy', 'Field of study is required').not().isEmpty(),
+			check('from', 'From date is required').not().isEmpty(),
+		],
 	],
 	async (req, res) => {
 		const errors = validationResult(req);
@@ -294,7 +276,7 @@ router.put(
 			from,
 			to,
 			current,
-			description
+			description,
 		} = req.body;
 
 		const newEdu = {
@@ -304,7 +286,7 @@ router.put(
 			from,
 			to,
 			current,
-			description
+			description,
 		};
 
 		try {
@@ -355,8 +337,8 @@ router.get('/github/:githubusername', async (req, res) => {
 			method: 'GET',
 			auth: {
 				username: config.get('githubClientId'),
-				password: config.get('githubSecret')
-			}
+				password: config.get('githubSecret'),
+			},
 		};
 
 		const response = await axios(options);
