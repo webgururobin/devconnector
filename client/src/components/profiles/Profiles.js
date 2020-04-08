@@ -9,7 +9,7 @@ import { getProfiles } from '../../actions/profile';
 export const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
 	useEffect(() => {
 		getProfiles();
-	}, []);
+	}, [getProfiles]);
 
 	return (
 		<Fragment>
