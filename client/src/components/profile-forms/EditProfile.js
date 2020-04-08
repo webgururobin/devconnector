@@ -61,7 +61,7 @@ export const EditProfile = ({
 			youtube: loading || !profile.social ? '' : profile.social.youtube,
 			instagram: loading || !profile.social ? '' : profile.social.instagram,
 		});
-	}, [loading]);
+	}, [getCurrentProfile, loading]);
 
 	const onChange = (e) =>
 		setFormData({ ...formData, [e.target.name]: e.target.value });
