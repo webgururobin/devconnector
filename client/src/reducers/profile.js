@@ -51,7 +51,7 @@ export default function (state = initialState, action) {
 
 		case GET_REPOS:
 			return {
-				state,
+				...state,
 				repos: payload,
 				loading: false,
 			};
