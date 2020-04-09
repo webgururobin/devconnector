@@ -6,6 +6,7 @@ import { getPosts } from '../../actions/post';
 
 import Spinner from '../layouts/Spinner';
 import PostItem from './PostItem';
+import PostForm from './PostForm';
 
 export const Posts = ({ getPosts, post: { posts, loading } }) => {
 	useEffect(() => {
@@ -16,15 +17,15 @@ export const Posts = ({ getPosts, post: { posts, loading } }) => {
 	) : (
 		<Fragment>
 			<h1 className='large text-primary'>Posts</h1>
-			<p className='lead'>
+			<div className='lead'>
 				<i className='fas fa-user'>Welcome to the community</i>
-				{/*PostForm*/}
+				<PostForm />
 				<div className='posts'>
 					{posts.map((post) => (
 						<PostItem key={post._id} post={post} />
 					))}
 				</div>
-			</p>
+			</div>
 		</Fragment>
 	);
 };
